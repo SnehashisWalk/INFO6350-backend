@@ -1,6 +1,8 @@
 import express from "express";
 import * as exerciseController from "../controllers/exercise.controller.js";
+import * as userController from "../controllers/user.controller.js";
 import Exercise from "../models/exercise/exercise.js";
+import User from "../models/user/user.js";
 
 const router = express.Router();
 
@@ -39,6 +41,44 @@ router.get("/exercises/filter", async (req, res) => {
       res.status(500).json({ message: 'Internal server error' });
     }
   });
+
+
+// USER routes
+router.post("/users", userController.createUser);
+router.get("/users", userController.getUsers);
+router.delete('/users/:email', userController.deleteUser);
+
+router.put('/users/:email', async (req, res) => {
+    const { email } = req.params; 
+    const { name, goal, level, gender, age, weight, height, bmi } = req.body;  
+
+    try {
+        let user = await User.findOne({ email });
+
+        if (!user) {
+            user = new User({
+                email,
+                name,
+            });
+        }
+
+        if (goal) user.goal = goal;
+        if (level) user.level = level;
+        if (gender) user.gender = gender;
+        if (age) user.age = age;
+        if (weight) user.weight = weight;
+        if (height) user.height = height;
+        if (bmi) user.bmi = bmi;
+
+        await user.save(); 
+
+        res.status(200).json({ message: 'User updated/created successfully', user });
+    } catch (error) {
+        console.error('Error updating/creating user:', error);
+        res.status(500).json({ error: 'Failed to update user' });
+    }
+});
+
   
 
 export default router;
