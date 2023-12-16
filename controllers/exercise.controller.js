@@ -3,9 +3,10 @@ import Exercise from "../models/exercise/exercise.js";
 
 export const createExercise = async (req, res, next) => {
   try {
-    const { title, type, exerciseType, imageURL, videoURL, steps, sets, reps } = req.body;
+    const { title, level, type, exerciseType, imageURL, videoURL, steps, sets, reps } = req.body;
     const exercise = await exerciseService.createExercise(
         title, 
+        level,
         type,
         exerciseType,
         imageURL, 

@@ -2,6 +2,7 @@ import Exercise from "../models/exercise/exercise.js";
 
 export const createExercise = async (
     title, 
+    level,
     type,
     exerciseType,
     imageURL, 
@@ -10,7 +11,7 @@ export const createExercise = async (
     sets, 
     reps
 ) => {
-  const existingExercise = await Exercise.findOne({ title });
+  const existingExercise = await Exercise.findOne({ title, level });
   if (existingExercise) {
     throw new Error(
       "Exercise already exists!",
@@ -19,6 +20,7 @@ export const createExercise = async (
   }
   const exercise = new Exercise({
     title, 
+    level,
     type,
     exerciseType,
     imageURL, 

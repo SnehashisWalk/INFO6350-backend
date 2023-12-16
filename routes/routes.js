@@ -12,10 +12,12 @@ router.post("/exercises", exerciseController.createExercise);
 router.get("/exercises", exerciseController.getExercises);
 router.delete('/exercises/:id', exerciseController.deleteExercise);
 
-router.get("/api/v1/exercises", async (req, res) => {
+router.get("/exercises/filter", async (req, res) => {
     try {
       let filter = {};
       const { exerciseType, type } = req.query;
+
+      console.log(exerciseType, type)
   
       if (exerciseType && type) {
         filter = { exerciseType, type };
