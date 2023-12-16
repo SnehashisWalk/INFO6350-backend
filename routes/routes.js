@@ -17,12 +17,12 @@ router.delete('/exercises/:id', exerciseController.deleteExercise);
 router.get("/exercises/filter", async (req, res) => {
     try {
       let filter = {};
-      const { exerciseType, type } = req.query;
+      const { exerciseType, type, level } = req.query;
 
-      console.log(exerciseType, type)
+      console.log(exerciseType, type, level)
   
-      if (exerciseType && type) {
-        filter = { exerciseType, type };
+      if (exerciseType && type && level) {
+        filter = { exerciseType, type, level};
       } else if (exerciseType) {
         filter = { exerciseType };
       } else if (type) {
