@@ -48,11 +48,10 @@ export const getUsers = async () => {
         weight: user.weight || '',
         height: user.height || '',
         bmi: user.bmi || '',
-        _id: user._id,
+        id: user._id,
         name: user.name,
         email: user.email,
-        created_at: user.created_at,
-        __v: user.__v || 0,
+        created_at: user.created_at
       };
   
       return formattedUser;
