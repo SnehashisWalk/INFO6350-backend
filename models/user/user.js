@@ -11,24 +11,31 @@ const userSchema = new mongoose.Schema({
   },
   goal: {
     type: String,
+    default: ""
   },
   level: {
     type: String,
+    default: ""
   },
   gender: {
     type: String,
+    default: ""
   },
   age: {
     type: Number,
+    default: 25
   },
   weight: {
-    type: String
+    type: String,
+    default: ""
   },
   height: {
-    type: String
+    type: String,
+    default: ""
   },
   bmi: {
-    type: String
+    type: String,
+    default: ""
   },
   created_at: {
     type: Date,

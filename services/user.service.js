@@ -13,7 +13,14 @@ export const createUser = async (
   }
   const user = new User({
     name,
-    email
+    email,
+    goal: "Default Goal",
+    level: "Default Level",
+    gender: "Default Gender",
+    age: 25, // Set your desired default age value
+    weight: "Default Weight",
+    height: "Default Height",
+    bmi: "Default BMI",
   });
   await user.save();
   return user;
@@ -27,6 +34,34 @@ export const getUsers = async () => {
       console.log(error);
     }
   };
+
+  export const getUser = async (email) => {
+    try {
+      const user = await User.findOne({ email });
+  
+      // Format the user data to fit the expected response format
+      const formattedUser = {
+        goal: user.goal || '',
+        level: user.level || '',
+        gender: user.gender || '',
+        age: user.age || 25,
+        weight: user.weight || '',
+        height: user.height || '',
+        bmi: user.bmi || '',
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        created_at: user.created_at,
+        __v: user.__v || 0,
+      };
+  
+      return formattedUser;
+    } catch (error) {
+      console.log(error);
+      return null; // Return null in case of an error
+    }
+  };
+  
 
 export const deleteUser = async (email) => {
     try {

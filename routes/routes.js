@@ -46,6 +46,7 @@ router.get("/exercises/filter", async (req, res) => {
 // USER routes
 router.post("/users", userController.createUser);
 router.get("/users", userController.getUsers);
+router.get("/users/:email", userController.getUser);
 router.delete('/users/:email', userController.deleteUser);
 
 router.put('/users/:email', async (req, res) => {

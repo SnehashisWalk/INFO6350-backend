@@ -32,6 +32,20 @@ export const getUsers = async (req, res, next) => {
     }
   };
 
+export const getUser = async (req, res, next) => {
+
+    const email = req.params.email;
+
+    try {
+      const user = await userService.getUser(email);
+      if (user) {
+        res.status(200).json({ user });
+      }
+    } catch (err) {
+      return res.status(500).json({ message: err.message });
+    }
+  };
+
 export const deleteUser = async (req, res) => {
     const email = req.params.email;
 
